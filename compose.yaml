@@ -4,8 +4,12 @@ services:
     volumes:
       - .:/app
     command: bash
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
 
   db:
     image: postgres:16
     environment:
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
