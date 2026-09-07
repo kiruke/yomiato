@@ -17,5 +17,8 @@ jobs:
       - name: Start services
         run: docker compose up -d
 
+      - name: Create test database
+        run: docker compose exec -T web bin/rails db:create
+
       - name: Run Rails tests
         run: docker compose exec -T web bin/rails test
