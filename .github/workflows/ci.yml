@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker compose build
+
+      - name: Start services
+        run: docker compose up -d
+
+      - name: Create test database
+        run: docker compose exec -T web bin/rails db:create
+
+      - name: Run Rails tests
+        run: docker compose exec -T web bin/rails test
