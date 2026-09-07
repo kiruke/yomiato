@@ -1,7 +1,7 @@
 require "test_helper"
 
 class SmokeTest < ActiveSupport::TestCase
-  test "test failure example" do
-    assert false
+  test "Rails application is loaded" do
+    assert Rails.application
   end
 end
