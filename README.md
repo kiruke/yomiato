@@ -31,8 +31,10 @@ erDiagram
 
     users {
         bigint id PK
-        varchar name "名称"
         varchar username "ユーザー名"
+        string email "eメール"
+        string crypted_password "暗号化パスワード"
+        string salt "ソルト"
     }
 
     books {
@@ -47,5 +49,8 @@ erDiagram
         bigint id PK
         bigint user_id FK
         bigint book_id FK
+        text pre_review 
+        text post_review 
+        date read_at
     }
 ```
