@@ -276,6 +276,8 @@ erDiagram
         string isbn "ISBN"
         date published_at "出版日"
         string title "タイトル"
+        string image_link "書影画像URL"
+        string info_link "Google Books詳細リンク"
     }
 
     reviews {
