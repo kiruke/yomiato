@@ -1,0 +1,19 @@
+<%= form_with url: "/books/search", method: :get do |form| %>
+  <%= form.label :query, "検索:" %>
+  <%= form.search_field :query %>
+  <%= form.submit "Search" %>
+<% end %>
+
+<% if @error_message.present? %>
+  <p><%= @error_message %></p>
+  <% elsif @book_data.present? %>
+    <% @book_data.each do |book| %>
+      <p><%= book[:title] %></p>
+      <p><%= book[:author] %></p>
+      <a href="<%= book[:info_link] %>"><img src="<%= book[:image_link] %>"></a>
+      <p><%= book[:published_at] %></p>
+      <p>--------------------------</p>
+    <% end %>
+  <% elsif @query.present? %>
+  <p>検索結果がありません</p>
+<% end %>
