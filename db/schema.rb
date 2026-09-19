@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_16_163812) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_17_215645) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -20,7 +20,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_16_163812) do
     t.string "image_link"
     t.string "info_link"
     t.string "isbn"
-    t.date "published_at"
+    t.string "published_at"
     t.string "title"
     t.datetime "updated_at", null: false
   end
