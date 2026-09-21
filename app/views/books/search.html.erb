@@ -12,6 +12,15 @@
       <p><%= book[:author] %></p>
       <a href="<%= book[:info_link] %>"><img src="<%= book[:image_link] %>"></a>
       <p><%= book[:published_at] %></p>
+
+      <%= form_with url: "/books", method: :post, scope: :book do |f| %>
+        <%= f.hidden_field :title, value: book[:title] %>
+        <%= f.hidden_field :author, value: book[:author] %>
+        <%= f.hidden_field :info_link, value: book[:info_link] %>
+        <%= f.hidden_field :image_link, value: book[:image_link] %>
+        <%= f.hidden_field :published_at, value: book[:published_at] %>
+        <%= f.submit "保存する" %>
+      <% end %>
       <p>--------------------------</p>
     <% end %>
   <% elsif @query.present? %>

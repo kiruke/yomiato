@@ -1,6 +1,16 @@
 require "open-uri"
 
 class BooksController < ApplicationController
+
+  def create
+    @book = Book.new(google_books_params)
+    if @book.save
+      redirect_to books_search_path, success: '保存しました'
+    else
+      flash.now[:danger] = '保存に失敗ししました'
+    end
+  end
+
   def search
     query = params[:query]
 
@@ -23,8 +33,15 @@ class BooksController < ApplicationController
         author: book["volumeInfo"]["authors"]&.first,
         image_link: book.dig("volumeInfo", "imageLinks", "thumbnail"),
         info_link: book["volumeInfo"]["infoLink"],
-        published_at: book["volumeInfo"]["publishedDate"]
+        published_at: book["volumeInfo"]["publishedDate"],
+        bookid: book["volumeInfo"]["id"]
       }
     end
+  end
+
+  private
+  
+  def google_books_params
+    params.require(:book).permit(:title, :author, :info_link, :image_link, :published_at)
   end
 end
