@@ -5,9 +5,10 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(google_books_params)
     if @book.save
-      redirect_to books_search_path, success: '保存しました'
+      redirect_to books_search_path, notice: '保存しました'
     else
       flash.now[:danger] = '保存に失敗ししました'
+      render :search, status: :unprocessable_entity
     end
   end
 
