@@ -17,7 +17,7 @@ class BooksController < ApplicationController
 
     begin
       data = GoogleBooksClient.search(query)
-    rescue URI::OpenURI::HTTPError
+    rescue Faraday::Error
       @error_message = "通信に失敗しました"
       return
     end
