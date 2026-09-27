@@ -1,0 +1,33 @@
+plugins:
+  - rubocop-rails
+
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+  Exclude:
+    - 'vendor/**/*'
+    - 'db/**/*'
+    - 'bin/**/*'
+    - 'spec/**/*'
+    - 'node_modules/**/*'
+    - 'config/**/*'
+    - 'config.ru'
+    - 'Gemfile'
+    - 'Rakefile'
+  DisplayCopNames: true
+
+Metrics/MethodLength:
+  CountComments: false
+  Max: 30
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+Metrics/AbcSize:
+  Max: 25
