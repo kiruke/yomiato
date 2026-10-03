@@ -31,3 +31,7 @@ Style/StringLiterals:
 
 Metrics/AbcSize:
   Max: 25
+
+Rails/I18nLocaleTexts:
+  Exclude:
+    - 'app/controllers/books_controller.rb'

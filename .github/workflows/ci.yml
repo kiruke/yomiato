@@ -20,5 +20,8 @@ jobs:
       - name: Create test database
         run: docker compose exec -T web bin/rails db:create
 
+      - name: Run RuboCop
+        run: docker compose exec -T web bundle exec rubocop --format simple
+
       - name: Run Rails tests
         run: docker compose exec -T web bin/rails test

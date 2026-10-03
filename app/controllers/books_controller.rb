@@ -37,7 +37,7 @@ class BooksController < ApplicationController
 
   def google_books_params
     params.expect(
-      book: [:title, :author, :info_link, :image_link, :published_at]
+      book: %i[title author info_link image_link published_at]
     )
   end
 end
