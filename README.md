@@ -255,6 +255,7 @@ yomiatoは、本を読む前の「予想・妄想」と、読んだ後の「感�
   * 外部書籍API
   * OPENAI API
 
+
 ## ER図
 
 ```mermaid
@@ -264,28 +265,33 @@ erDiagram
 
     users {
         bigint id PK
-        varchar username "ユーザー名"
-        string email "eメール"
-        string crypted_password "暗号化パスワード"
-        string salt "ソルト"
+        string username "NOT NULL"
+        string email "NOT NULL, UNIQUE"
+        string crypted_password
+        string salt
+        datetime created_at "NOT NULL"
+        datetime updated_at "NOT NULL"
     }
 
     books {
         bigint id PK
-        string author "著者名"
-        string isbn "ISBN"
-        date published_at "出版日"
-        string title "タイトル"
-        string image_link "書影画像URL"
-        string info_link "Google Books詳細リンク"
+        string title
+        string author
+        string isbn
+        string published_at
+        string image_link
+        string info_link
+        datetime created_at "NOT NULL"
+        datetime updated_at "NOT NULL"
     }
 
     reviews {
         bigint id PK
-        bigint user_id FK
-        bigint book_id FK
-        text pre_review 
-        text post_review 
-        date read_at
+        bigint user_id FK "NOT NULL"
+        bigint book_id FK "NOT NULL"
+        text pre_review
+        text post_review
+        datetime created_at "NOT NULL"
+        datetime updated_at "NOT NULL"
     }
 ```
