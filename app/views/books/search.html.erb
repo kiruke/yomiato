@@ -29,3 +29,4 @@
   <% elsif @query.present? %>
   <p>検索結果がありません</p>
 <% end %>
+<%= link_to 'ログアウト', logout_path, data: { turbo_method: :delete } %>
