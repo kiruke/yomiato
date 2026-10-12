@@ -1,6 +1,3 @@
-<p><%= flash[:notice] %></p>
-<p><%= flash[:danger] %></p>
-
 <%= form_with url: "/books/search", method: :get do |form| %>
   <%= form.label :query, "検索:" %>
   <%= form.search_field :query %>
@@ -29,4 +26,3 @@
   <% elsif @query.present? %>
   <p>検索結果がありません</p>
 <% end %>
-<%= link_to 'ログアウト', logout_path, data: { turbo_method: :delete } %>

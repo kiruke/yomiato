@@ -17,6 +17,8 @@ RSpec.describe 'Users', type: :request do
 
         expect(User.last.email).to eq 'test@example.com'
         expect(response).to redirect_to(root_path)
+        get books_search_path
+        expect(response).to have_http_status(:ok)
       end
     end
 
