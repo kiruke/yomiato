@@ -1,10 +1,12 @@
 class BooksController < ApplicationController
   def create
-    @book = Book.new(google_books_params)
-    if @book.save
-      redirect_to books_search_path, notice: '保存しました'
+    @book = Book.find_or_create_by(isbn: google_books_params[:isbn]) do |book|
+      book.assign_attributes(google_books_params)
+    end
+    if @book.persisted?
+      redirect_to new_review_path(book_id: @book.id)
     else
-      flash.now[:danger] = '保存に失敗ししました'
+      flash.now[:danger] = 'もう一度選択してください'
       render :search, status: :unprocessable_content
     end
   end
@@ -22,13 +24,20 @@ class BooksController < ApplicationController
     end
 
     @book_data = (data['items'] || []).map do |book|
+      #ISBN取得処理追加
+      identifiers = book["volumeInfo"]["industryIdentifiers"] || []
+      isbn_data = identifiers.find do |item|
+        item["type"] == "ISBN_13"
+      end
+      isbn = isbn_data&.[]("identifier")
       {
         title: book['volumeInfo']['title'],
         author: book['volumeInfo']['authors']&.first,
         image_link: book.dig('volumeInfo', 'imageLinks', 'thumbnail'),
         info_link: book['volumeInfo']['infoLink'],
         published_at: book['volumeInfo']['publishedDate'],
-        bookid: book['volumeInfo']['id']
+        bookid: book['id'],
+        isbn: isbn
       }
     end
   end
@@ -37,7 +46,7 @@ class BooksController < ApplicationController
 
   def google_books_params
     params.expect(
-      book: %i[title author info_link image_link published_at]
+      book: %i[title author info_link image_link published_at isbn]
     )
   end
 end
