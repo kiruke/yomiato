@@ -61,6 +61,10 @@ RSpec.describe "Reviews", type: :request do
           }
         }
       }.to change(Review, :count).by(1)
+
+      review = Review.last
+      expect(review.user).to eq(user)
+      expect(review.book).to eq(book)
     end
 
     it "未ログインユーザーはレビューを保存できないこと" do
@@ -113,6 +117,24 @@ RSpec.describe "Reviews", type: :request do
           book_id: book.id,
           review: {
             pre_review: 'これは妄想レビューです。'
+          }
+        }
+      }.not_to change(Review, :count)
+
+      expect(response).to have_http_status(:unprocessable_content)
+    end
+
+    it "レビュー本文が800文字を超える場合、保存できないこと" do
+      post login_path, params: {
+        email: user.email,
+        password: 'password123'
+      }
+
+      expect {
+        post reviews_path, params: {
+          book_id: book.id,
+          review: {
+            pre_review: 'a' * 801
           }
         }
       }.not_to change(Review, :count)
