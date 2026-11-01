@@ -24,12 +24,11 @@ class BooksController < ApplicationController
     end
 
     @book_data = (data['items'] || []).map do |book|
-      #ISBN取得処理追加
-      identifiers = book["volumeInfo"]["industryIdentifiers"] || []
+      identifiers = book['volumeInfo']['industryIdentifiers'] || []
       isbn_data = identifiers.find do |item|
-        item["type"] == "ISBN_13"
+        item['type'] == 'ISBN_13'
       end
-      isbn = isbn_data&.[]("identifier")
+      isbn = isbn_data&.[]('identifier')
       {
         title: book['volumeInfo']['title'],
         author: book['volumeInfo']['authors']&.first,
