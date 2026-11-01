@@ -1,0 +1,11 @@
+<% if @review.errors.any? %>
+  <p><%= @review.errors.full_messages.join(", ") %></p>
+<% end %>
+
+<div class="col-lg-8 offset-lg-2">
+  <%= form_with model: @review, url: reviews_path(book_id: params[:book_id]) do |f| %>
+    <%= f.label :pre_review %>
+    <%= f.text_area :pre_review, class: "form-control mb-3", row: "4" %>
+    <%= f.submit '決定', class: "btn btn-primary" %>
+  <% end %>
+</div>

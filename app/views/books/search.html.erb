@@ -19,7 +19,8 @@
         <%= f.hidden_field :info_link, value: book[:info_link] %>
         <%= f.hidden_field :image_link, value: book[:image_link] %>
         <%= f.hidden_field :published_at, value: book[:published_at] %>
-        <%= f.submit "保存する" %>
+        <%= f.hidden_field :isbn, value: book[:isbn] %>
+        <%= f.submit "妄想レビューする" %>
       <% end %>
       <p>--------------------------</p>
     <% end %>
